@@ -4,16 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="725bc315-5281-4b4b-a0ee-7736e1e25040" name="Changes" comment="init">
-      <change afterPath="$PROJECT_DIR$/domain/face_recognition/conver_file_to_np.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/domain/order/ai_order.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/face_recognition/face_recognition.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/face_recognition/face_recognition_router.py" beforeDir="false" afterPath="$PROJECT_DIR$/domain/face_recognition/face_recognition_router.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/menu/menu_dto.py" beforeDir="false" afterPath="$PROJECT_DIR$/domain/menu/menu_dto.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/domain/polly/polly_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/domain/polly/polly_service.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-    </list>
+    <list default="true" id="725bc315-5281-4b4b-a0ee-7736e1e25040" name="Changes" comment="나이인식 기능 추가" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -159,7 +150,7 @@
       <workItem from="1714742348783" duration="1367000" />
       <workItem from="1714823427722" duration="639000" />
       <workItem from="1714825968969" duration="113000" />
-      <workItem from="1714826249302" duration="14916000" />
+      <workItem from="1714826249302" duration="15068000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />
@@ -177,7 +168,15 @@
       <option name="project" value="LOCAL" />
       <updated>1714743313533</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="나이인식 기능 추가">
+      <option name="closed" value="true" />
+      <created>1714914320149</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1714914320149</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -196,7 +195,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="init" />
-    <option name="LAST_COMMIT_MESSAGE" value="init" />
+    <MESSAGE value="나이인식 기능 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="나이인식 기능 추가" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
