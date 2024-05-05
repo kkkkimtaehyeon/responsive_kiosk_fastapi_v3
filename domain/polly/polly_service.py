@@ -8,27 +8,29 @@ _ = load_dotenv(find_dotenv())
 BUCKET = 'responsive-bucket'
 REGION = 'ap-northeast-2'
 
-# polly 접근
-polly = boto3.client(
-    'polly',
-    aws_access_key_id=os.getenv("S3_ACCESS_KEY"),
-	aws_secret_access_key=os.getenv("S3_SECRET_KEY"),
-    region_name='ap-northeast-2'
-)
 
-#S3 접근
-s3 = boto3.client(
-	's3',
-	aws_access_key_id=os.getenv("S3_ACCESS_KEY"),
-	aws_secret_access_key=os.getenv("S3_SECRET_KEY")
-)
+class Aws:
+    # polly 접근
+    polly = boto3.client(
+        'polly',
+        aws_access_key_id=os.getenv("S3_ACCESS_KEY"),
+        aws_secret_access_key=os.getenv("S3_SECRET_KEY"),
+        region_name='ap-northeast-2'
+    )
+
+    # S3 접근
+    s3 = boto3.client(
+        's3',
+        aws_access_key_id=os.getenv("S3_ACCESS_KEY"),
+        aws_secret_access_key=os.getenv("S3_SECRET_KEY")
+    )
 
 
 class PollyService:
 
     def get_tts_url(userScript):
         # 텍스트를 음성으로 변환
-        response = polly.synthesize_speech(
+        response = Aws.polly.synthesize_speech(
             LanguageCode='ko-KR',
             Text=userScript,
             OutputFormat='mp3',
@@ -42,7 +44,6 @@ class PollyService:
         #key = 'test.wav'
 
         # 바이트 데이터를 S3에 업로드
-        s3.put_object(Body=audio_data, Bucket='responsive-bucket', Key=key, ContentType='audio/wav')
+        Aws.s3.put_object(Body=audio_data, Bucket='responsive-bucket', Key=key, ContentType='audio/wav')
 
         return f'https://{BUCKET}.s3.{REGION}.amazonaws.com/{key}'
-
