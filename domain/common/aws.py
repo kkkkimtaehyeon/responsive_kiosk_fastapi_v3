@@ -23,7 +23,7 @@ class Aws:
     
 
     def save_image_on_s3(image_data, key):
-        Aws.s3.put_object(Body=image_data, Bucket=BUCKET, Key=key, ContentType='image/jpg')
+        Aws.s3.put_object(Body=image_data, Bucket=BUCKET, Key=key, ContentType='image/png')
         return f'https://{BUCKET}.s3.{REGION}.amazonaws.com/{key}'
     
     def save_audio_on_s3(audio_data, key):
