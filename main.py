@@ -12,7 +12,7 @@ from domain.search import search_router
 app = FastAPI()
 
 origins = [
-    "http://localhost",
+    "http://localhost:8080",  # 서버 도메인
     "http://localhost:3000",  # 클라이언트 도메인
 ]
 

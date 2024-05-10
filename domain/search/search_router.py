@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 from pydantic import BaseModel
 from typing import List
+from domain.order.ai_order import order
 
 router = APIRouter(
     prefix="/fast/api/search",
@@ -11,32 +12,15 @@ class SearchKeywords(BaseModel):
     ingredients: List[str]
 
 @router.post("")
-async def search(searchKeywords: SearchKeywords):
-    search_script = generate_search_script(searchKeywords.ingredients)
+async def search_menu(search_keywords:SearchKeywords):
 
-    #received_menus = search_script로 gpt에서 메뉴 데이터 받아오는 함수
+    ingredients_str = ','.join(search_keywords.ingredients)
+    result = order('[' + ingredients_str + ']')
 
-    return dummy_data
+    return result
 
 
 def generate_search_script(ingredients):
     ingredients = ', '.join(ingredients)
-    return f'return menu infos include these keywords {ingredients}'
+    return f'Return menu information including these keywords {ingredients}'
 
-dummy_data = [
-    {
-        "id": 1,
-        "name": "아메리카노",
-        "price": 3000
-    },
-    {
-        "id": 2,
-        "name": "카페라떼",
-        "price": 3500
-    },
-    {
-        "id": 3,
-        "name": "바닐라라떼",
-        "price": 3700
-    }
-]

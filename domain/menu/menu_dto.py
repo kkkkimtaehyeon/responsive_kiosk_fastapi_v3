@@ -6,3 +6,4 @@ class Menu(BaseModel):
     price: float
     description: str
     categoryName: str
+    imagePath: str
