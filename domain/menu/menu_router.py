@@ -1,6 +1,6 @@
 # checked
 from fastapi import APIRouter
-from domain.menu.menu_dto import Menu
+from domain.menu.menu_dto2 import Menu2
 from domain.order.ai_order import add_history
 from domain.menu.menu_service import generate_menu_prompt
 
@@ -12,7 +12,7 @@ router = APIRouter(
 
 # 메뉴 추가
 @router.post("")
-async def add_menu(menu:Menu):
+async def add_menu(menu:Menu2):
     # 원래 메뉴객체 불러들여올것
     # 관리자 페이지에서 메뉴 등록느낌의, 메뉴 객체 생성
     # menu = Menu("americano", 5500, "쓰지 않은 커피입니다.", "커피")

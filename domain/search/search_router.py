@@ -13,14 +13,23 @@ class SearchKeywords(BaseModel):
 
 @router.post("")
 async def search_menu(search_keywords:SearchKeywords):
-
-    ingredients_str = ','.join(search_keywords.ingredients)
-    result = order('[' + ingredients_str + ']')
+    result = order(convert_to_searchform(search_keywords.ingredients))
+    # result = [
+    #     {
+    #         "id": 1
+    #     },
+    #     {
+    #         "id": 2
+    #     },
+    #     {
+    #         "id":3
+    #     }
+    # ]
 
     return result
 
 
-def generate_search_script(ingredients):
-    ingredients = ', '.join(ingredients)
-    return f'Return menu information including these keywords {ingredients}'
+def convert_to_searchform(ingredients):
+    ingredients_str = ', '.join(ingredients)
+    return f'[${ingredients_str}]'
 

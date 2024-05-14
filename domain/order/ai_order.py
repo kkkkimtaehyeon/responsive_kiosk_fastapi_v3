@@ -1,5 +1,6 @@
 import json
 from domain.common.gpt_setting import chain
+from domain.menu.menu_service import add_history
 
 
 # json 포맷으로 변환

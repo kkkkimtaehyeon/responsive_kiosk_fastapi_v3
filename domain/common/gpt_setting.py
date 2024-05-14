@@ -19,13 +19,12 @@ _ = load_dotenv(find_dotenv())
 llm = ChatOpenAI(
     api_key=os.getenv("OPENAI_API_KEY_EUNHAK"),
     # model_name="gpt-3.5-turbo", default값
-    # fine tuning된 모델을 사용. 
-    # venv\Lib\site-packages\langchain_openai\chat_models\base.py
-    # get_num_tokens_from_messages에 새로운 모델 이름 추가해야할것.
-    # 패키지를 수정하는 일은, 배포에 알맞지 않은 방식
-    model_name="ft:gpt-3.5-turbo-0125:personal:cafebot:9Ly4475o",
+    model_name="ft:gpt-3.5-turbo-0125:personal:cafebot1-2:9Oer7XRM",
+
+    # get_num_tokens_from_messages() 오류 해결
+    # tiktoken_model_name 토큰수 계산될 모델
+    tiktoken_model_name="gpt-3.5-turbo",
     temperature=0.2,
-    # max_tokens=40
     )
 
 
@@ -36,10 +35,12 @@ memory = ConversationSummaryBufferMemory(
     return_messages=True,
 )
 
-
 prompt = ChatPromptTemplate.from_messages(
     [
-        (f"system", """You're a coffee shop attendant. Respond to customer orders."""),
+        (f"system", """You're a coffee shop bot. Respond to customer orders.
+         If a sentence containing square brackets with keywords is input, select all relevant items from the registered menus based on the keywords.
+         Items enclosed in parentheses signify menu registration.
+         For any other input without brackets, handle the order."""),
         MessagesPlaceholder(variable_name="history"),
         ("human", "{order}")
     ]
