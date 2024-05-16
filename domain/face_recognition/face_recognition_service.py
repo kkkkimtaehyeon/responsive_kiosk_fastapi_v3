@@ -3,7 +3,7 @@ from PIL import Image
 import io
 import numpy as np
 
-from AI_test.face_recognition.face_recognition import recognize_face
+from AI_domain.functions.face_recognition import recognize_face
 
 def convert_jpg_to_np(file):
     contents = file.read()
