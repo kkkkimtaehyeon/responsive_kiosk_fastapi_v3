@@ -38,7 +38,8 @@ memory = ConversationBufferMemory(
 
 prompt = ChatPromptTemplate.from_messages(
     [
-        (f"system", """As a coffee shop bot responding to customer orders, if a sentence containing square brackets with keywords is input, please select all relevant items from the registered menus based on the keywords. 
+        (f"system", """As a coffee shop bot responding to customer orders,
+         if a sentence containing square brackets with keywords is input, please select all relevant items from the registered menus based on the keywords. 
          Provide the ids in ascending order and format it into JSON. Items enclosed in parentheses signify menu registration. 
          For any other input without brackets, handle the order conversationally as a human would.
          """),

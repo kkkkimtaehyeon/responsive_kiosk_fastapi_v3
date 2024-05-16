@@ -1,27 +1,28 @@
 import json
 from AI_test.order.test_ai_order import chain
 
+# -------중년층 Keywords 입력, 지정된 JSON 답변
 
-# 호출될 함수. str 사용자 질문을 매개변수로.
+
+# ingredients 키워드 질문 / gpt 답변
 def search_menu(ingredients):
     menu_id_list = chain.predict(convert_to_searchform(ingredients))
 
     return convert_json(menu_id_list)
 
 
-# order는 말그대로 주문시 사용하는 함수
-# 키워드 검색할 때 검색된 메뉴를 반환하는 함수 따로 만들 필요
+# 콤마로 구분, 대괄호로 묶인 문자열 반환
+def convert_to_searchform(ingredients):
+    ingredients_str = ', '.join(ingredients)
+    return f'[${ingredients_str}]'
 
-# json 포맷으로 변환(json 변환, 주문 종료 검증하는 기능이 한 함수에 들어가 있음 -> 분리 필요)
+
+# JSON 포맷으로 변환 시도
 def convert_json(result):
     try:
         json_data = json.loads(result)
         return json_data
-    except ValueError:
-        # 키워드에 해당되는 메뉴가 없을 때 
-        return None
     
-
-def convert_to_searchform(ingredients):
-    ingredients_str = ', '.join(ingredients)
-    return f'[${ingredients_str}]'
+    # JSON 답변이 아닐때
+    except ValueError:
+        return None
