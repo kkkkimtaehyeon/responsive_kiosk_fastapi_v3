@@ -2,7 +2,7 @@ from langchain_openai.chat_models import ChatOpenAI
 
 from langchain.chains import LLMChain
 from langchain.prompts import ChatPromptTemplate, MessagesPlaceholder
-from langchain.memory import ConversationSummaryBufferMemory, ConversationBufferMemory
+from langchain.memory import ConversationBufferMemory
 
 import json
 import os
@@ -10,12 +10,12 @@ from dotenv import load_dotenv, find_dotenv
 
 _ = load_dotenv(find_dotenv())
 
+from .model_manage import CAFEBOT
+
 llm = ChatOpenAI(
-    api_key=os.getenv("OPENAI_API_KEY_EUNHAK"),
-    # model_name="gpt-3.5-turbo", default값
-    #model_name="ft:gpt-3.5-turbo-0125:personal:cafebot:9Ly4475o",
-    #model_name="ft:gpt-3.5-turbo-0125:personal:cafebot1-2:9Oer7XRM",
-    model_name="ft:gpt-3.5-turbo-0125:personal:cafebot-keysearch:9Orl9xJQ",
+    api_key=os.getenv("SERV_KEY"),
+
+    model_name= CAFEBOT,
     
     # get_num_tokens_from_messages() 오류 해결
     # tiktoken_model_name 토큰수 계산될 모델
@@ -30,18 +30,9 @@ memory = ConversationBufferMemory(
     return_messages=True,
 )
 
-# memory = ConversationSummaryBufferMemory(
-#     llm= llm,
-#     memory_key="history",        
-#     return_messages=True,
-# )
-
 prompt = ChatPromptTemplate.from_messages(
     [
-        (f"system", """As a coffee shop bot responding to customer orders,
-         if a sentence containing square brackets with keywords is input, please select all relevant items from the registered menus based on the keywords. 
-         Provide the ids in ascending order and format it into JSON. Items enclosed in parentheses signify menu registration. 
-         For any other input without brackets, handle the order conversationally as a human would.
+        (f"system", """As a coffee shop bot responding to customer orders
          """),
         MessagesPlaceholder(variable_name="history"),
         ("human", "{order}")
@@ -67,7 +58,7 @@ def convert_json(result):
 
 
 # fastapi에서 호출될 함수. 생성한 답변 반환
-def order(str):
+def cafebot_order(str):
 
     result = chain.predict(order = str)
 
@@ -75,6 +66,6 @@ def order(str):
     
 
 # fastapi에서 호출될 함수. menu_prompt를 buffermemory내에 저장
-def add_history(menu_prompt):
+def add_message_cafebot(menu_prompt):
 
     memory.chat_memory.add_ai_message(menu_prompt)
