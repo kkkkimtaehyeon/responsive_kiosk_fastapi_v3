@@ -1,12 +1,12 @@
 import json
-from AI_test.order.test_ai_order import chain
+from AI_domain.models.ai_cafe_bot import chain_cafebot
 
 # -------노년층 대화 입력, 지정된 JSON 답변
 
 
 # str 사용자 질문 / gpt 답변
 def order(str):
-    result = chain.predict(order = str)
+    result = chain_cafebot.predict(order = str)
 
     return convert_json(result)
 
