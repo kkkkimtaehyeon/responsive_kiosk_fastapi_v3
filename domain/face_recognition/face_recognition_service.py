@@ -1,8 +1,9 @@
 # import cv2
-from deepface import DeepFace
 from PIL import Image
 import io
 import numpy as np
+
+from AI_test.face_recognition.face_recognition import recognize_face
 
 def convert_jpg_to_np(file):
     contents = file.read()
@@ -10,7 +11,7 @@ def convert_jpg_to_np(file):
     return np.array(image)
 
 def get_age_from_image(image_np):
-    result = DeepFace.analyze(img_path=image_np, actions=['age'], detector_backend='yolov8', enforce_detection=False)
+    result = recognize_face(image_np)
     age = result[0]['age']
     return age
 

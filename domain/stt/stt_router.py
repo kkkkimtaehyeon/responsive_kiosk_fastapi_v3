@@ -1,6 +1,6 @@
 #checked
 from domain.common.user_script_dto import UserScript
-from domain.order.ai_order import order
+from domain.order.order_service import order
 from domain.polly.polly_service import get_tts_url
 from fastapi import APIRouter
 

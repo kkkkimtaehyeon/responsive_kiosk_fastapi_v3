@@ -1,19 +1,21 @@
 from fastapi import APIRouter
-from pydantic import BaseModel
-from typing import List
-from domain.order.ai_order import order
+from search_keyword_dto import SearchKeywords
+from search_service import search_menu_by_keywords
+
+
+from domain.ai_order.order_service import order
 
 router = APIRouter(
     prefix="/fast/api/search",
     tags=["face-recognition"]
 )
 
-class SearchKeywords(BaseModel):
-    ingredients: List[str]
+
 
 @router.post("")
 async def search_menu(search_keywords:SearchKeywords):
-    result = order(convert_to_searchform(search_keywords.ingredients))
+    result = search_menu_by_keywords(search_keywords)
+    # example
     # result = [
     #     {
     #         "id": 1
@@ -29,7 +31,5 @@ async def search_menu(search_keywords:SearchKeywords):
     return result
 
 
-def convert_to_searchform(ingredients):
-    ingredients_str = ', '.join(ingredients)
-    return f'[${ingredients_str}]'
+
 
