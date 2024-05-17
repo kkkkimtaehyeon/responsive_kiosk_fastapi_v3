@@ -4,7 +4,7 @@ from langchain.chains import LLMChain
 from langchain.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain.memory import ConversationBufferMemory
 
-from model_manage import CAFEBOT
+from .model_manage import CAFEBOT
 
 from dotenv import load_dotenv, find_dotenv
 import os
