@@ -10,12 +10,14 @@ from dotenv import load_dotenv, find_dotenv
 
 _ = load_dotenv(find_dotenv())
 
-from .model_manage import KEYBOT
+from .model_manage import GPT4O
+# from .model_manage import KEYBOT
 
 llm = ChatOpenAI(
     api_key=os.getenv("SERV_KEY"),
 
-    model_name= KEYBOT,
+    model_name= GPT4O,
+    # model_name= KEYBOT,
     
     # get_num_tokens_from_messages() 오류 해결
     # tiktoken_model_name 토큰수 계산될 모델
@@ -32,8 +34,8 @@ memory = ConversationBufferMemory(
 
 prompt = ChatPromptTemplate.from_messages(
     [
-        (f"system", """As a coffee shop bot responding to customer orders,
-         if a sentence containing square brackets with keywords is input, please select all relevant items from the registered menus based on the keywords. 
+        (f"system", """
+         If a sentence containing square brackets with keywords is input, please select all relevant items from the registered menus based on the keywords. 
          Provide the ids in ascending order and format it into JSON. Items enclosed in parentheses signify menu registration. 
          For any other input without brackets, handle the order conversationally as a human would.
          """),
