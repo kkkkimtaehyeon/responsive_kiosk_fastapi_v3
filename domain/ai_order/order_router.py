@@ -9,4 +9,4 @@ router = APIRouter(
 
 @router.post("")
 async def ai_order(userScript: UserScript):
-    return order_service.order_with_ai(userScript)
+    return order_service.order_with_ai(userScript.userScript)
