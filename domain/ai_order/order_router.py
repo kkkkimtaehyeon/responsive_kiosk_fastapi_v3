@@ -1,6 +1,6 @@
 from fastapi import APIRouter
-from domain.common import user_script_dto as UserScript
-from domain.ai_order import order_service 
+from ..common.user_script_dto import UserScript
+from domain.ai_order import order_service
 
 router = APIRouter(
     prefix="/fast/api/ai-order",
