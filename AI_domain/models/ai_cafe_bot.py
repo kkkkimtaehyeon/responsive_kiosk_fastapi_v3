@@ -13,7 +13,7 @@ _ = load_dotenv(find_dotenv())
 
 
 llm = ChatOpenAI(
-    api_key=os.getenv("SERV_KEY"),
+    api_key=os.getenv("OPENAI_API_KEY_EUNHAK"),
 
     model_name= CAFEBOT,
 
@@ -36,7 +36,7 @@ prompt = ChatPromptTemplate.from_messages(
          For any other input without brackets, handle the order conversationally as a human would.
          """),
         MessagesPlaceholder(variable_name="history"),
-        ("human", "{order}")
+        ("human", "{question}")
     ]
 )
 

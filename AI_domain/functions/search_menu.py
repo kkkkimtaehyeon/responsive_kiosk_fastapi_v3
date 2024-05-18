@@ -14,7 +14,7 @@ def search_menu(ingredients):
 # 콤마로 구분, 대괄호로 묶인 문자열 반환
 def convert_to_searchform(ingredients):
     ingredients_str = ', '.join(ingredients)
-    return f'[${ingredients_str}]'
+    return f'[{ingredients_str}]'
 
 
 # JSON 포맷으로 변환 시도
