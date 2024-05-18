@@ -54,6 +54,7 @@ cover/
 
 # My Test env
 my_test_main.py
+AI_test/
 
 # Translations
 *.mo
