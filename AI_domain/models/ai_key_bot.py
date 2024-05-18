@@ -32,9 +32,9 @@ prompt = ChatPromptTemplate.from_messages(
     [
         ("system", """
          Items enclosed in parentheses signify menu registration. 
-         ex) (id: 3, name: 딸기주스, price: 5500, description: 딸기를 갈아 넣은 주스, categoryName: 주스)
+         ex: (id: 3, name: 딸기주스, price: 5500, description: 딸기를 갈아 넣은 주스, categoryName: 주스)
          If a sentence containing square brackets with keywords is input, please select all relevant items from the registered menus based on the keywords, and then provide the IDs in ascending order and format it into JSON. 
-         ex) "menuList": ["id": 1,"name": "아메리카노","id": 2,"name": "라떼"]
+         ex: ("menuList": [("id": 1,"name": "아메리카노"),("id": 2,"name": "라떼")])
          When you gen answer, you don't need new lines, special characters, etc.
          """),
         MessagesPlaceholder(variable_name="history"),
