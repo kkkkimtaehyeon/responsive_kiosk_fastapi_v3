@@ -6,7 +6,7 @@ from AI_domain.models.ai_key_bot import chain_keybot
 
 # ingredients 키워드 질문 / gpt 답변
 def search_menu(ingredients):
-    menu_id_list = chain_keybot.predict(convert_to_searchform(ingredients))
+    menu_id_list = chain_keybot.predict(question = convert_to_searchform(ingredients))
 
     return convert_json(menu_id_list)
 

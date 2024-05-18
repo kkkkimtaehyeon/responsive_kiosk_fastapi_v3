@@ -6,7 +6,7 @@ from AI_domain.models.ai_cafe_bot import chain_cafebot
 
 # str 사용자 질문 / gpt 답변
 def order(str):
-    result = chain_cafebot.predict(order = str)
+    result = chain_cafebot.predict(question = str)
 
     return convert_json(result)
 

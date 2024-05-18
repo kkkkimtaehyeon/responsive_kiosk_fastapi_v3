@@ -1,44 +1,93 @@
-case 1. 메뉴 등록 없는 상태에서의 주문
+case10 메뉴 등록 없는 상태에서의 주문
 {"messages": [ {"role": "user", "content": "메뉴 알려줘요"}, {"role": "assistant", "content": "죄송합니다, 메뉴는 아직 준비중에 있어요."}]}
-{"messages": [ {"role": "user", "content": "현재 메뉴"}, {"role": "assistant", "content": "죄송해요, 아직 메뉴는 준비중이에요."}]}
-{"messages": [ {"role": "user", "content": "음료 뭐 있어"}, {"role": "assistant", "content": "현재 저희 메뉴는 아직 준비중이에요."}]}
-{"messages": [ {"role": "user", "content": "마실거줘"}, {"role": "assistant", "content": "오늘 메뉴는 아직 준비중에 있어요."}]}
 {"messages": [ {"role": "user", "content": "레몬에이드"}, {"role": "assistant", "content": "현재 레몬에이드는 준비되어 있지 않아요."}]}
 {"messages": [ {"role": "user", "content": "아메리카노랑 오렌지 주스"}, {"role": "assistant", "content": "죄송합니다, 메뉴는 준비되어 있지 않아요."}]}
 
-case 2. 메뉴 등록 하나 상태에서의 주문
-{"messages": [ {"role": "assistant", "content": "(id: 1,name: 아메리카노, price: 6000, description: 에스프레소에 물을 희석 시켜 만들었다, categoryName: 커피)"}, 
-{"role": "user", "content": "메뉴 뭐 있어요"}, {"role": "assistant", "content": "아메리카노가 있습니다. 주문하시겠어요?"}, 
+
+case20 메뉴 등록 하나 상태
+
+case21 일반적인 주문. 메뉴 입력>옵션>수량>포장/매장 확인
+{"messages": [ {"role": "assistant", "content": "(id: 14, name: 아메리카노, price: 6000, description: 에스프레소에 물을 희석 시켜 만들었다, categoryName: 커피)"}, 
+{"role": "user", "content": "메뉴 뭐 있어요"}, {"role": "assistant", "content": "아메리카노가 있어요. 주문하시겠어요?"}, 
+{"role": "user", "content": "얼마에요"}, {"role": "assistant", "content": "가격은 6000원 이에요."}, 
 {"role": "user", "content": "아메리카노 줘요"}, {"role": "assistant", "content": "아메리카노 따뜻하게 드릴까요?"}, 
 {"role": "user", "content": "시원하게"}, {"role": "assistant", "content": "시원한 아메리카노 몇 잔 드릴까요?"}, 
 {"role": "user", "content": "두잔주세요"}, {"role": "assistant", "content": "드시고 가시나요?"}, 
-{"role": "user", "content": "테이크아웃"}, {"role": "assistant", "content": "{\"takeout\": \"포장\", \"totalPrice\": 12000, \"orderDetailRequestDtoList\": [{\"menuName\": \"아메리카노\",\"amount\": 2,\"price\": 12000,\"temperature\": \"ice\"}]}"}]}
+{"role": "user", "content": "테이크아웃"}, 
+{"role": "assistant", "content": "{\"takeout\": \"포장\", \"totalPrice\": 12000, \"orderDetailRequestDtoList\": [{\"menuName\": \"아메리카노\",\"amount\": 2,\"price\": 12000,\"temperature\": \"ice\"}]}"}]}
 
-{"messages": [ {"role": "assistant", "content": "(id: 7,name: 망고주스, price: 4800, description: 망고를 갈아 만든 달달한 음료, categoryName: 주스)"}, 
-{"role": "user", "content": "안녕 메뉴는 뭐뭐 있어"}, {"role": "assistant", "content": "반가워요! 현재 망고주스가 있는데, 어떠신가요?"}, 
-{"role": "user", "content": "망고주스 뜨겁게 두 개"}, {"role": "assistant", "content": "뜨거운 망고주스 세 잔, 더 필요하신게 있으신가요?"}, 
-{"role": "user", "content": "이대로"}, {"role": "assistant", "content": "포장하시나요?"}, 
-{"role": "user", "content": "응 그리고 망고주스 차갑게 한잔도 줘"}, {"role": "user", "content": "망고주스 뜨겁게 세잔, 차갑게 한 잔 맞나요?"}, 
-{"role": "user", "content": "맞아"}, {"role": "assistant", "content": "{\"takeout\": \"포장\", \"totalPrice\": 14400, \"orderDetailRequestDtoList\": [{\"menuName\": \"망고주스\",\"amount\": 2,\"price\": 9600,\"temperature\": \"hot\"}, {\"menuName\": \"망고주스\",\"amount\": 1,\"price\": 4800,\"temperature\": \"ice\"}]}"}]}
-
-{"messages": [ {"role": "assistant", "content": "(id: 1,name: 초코 라떼, price: 5800, description: 초코향과 맛이 진한 라떼, categoryName: 논커피)"}, 
+case22 먼저 포장/매장 주문 입력>메뉴와 수량 동시 입력>온도 확인. 같은 메뉴를 온도에 따라 메뉴 나뉨. 포장/매장 변경 입력
+{"messages": [ {"role": "assistant", "content": "(id: 1, name: 초코 라떼, price: 5800, description: 초코향과 맛이 진한 라떼, categoryName: 논커피)"}, 
 {"role": "user", "content": "여기서 먹을건데 맛있는거 주세요"}, {"role": "assistant", "content": "달콤한 초콜릿이 첨가된 초코라떼가 있어요. 주문하시겠어요?"}, 
 {"role": "user", "content": "초코라떼 두잔"}, {"role": "assistant", "content": "초코라떼 두 잔, 차갑게 드릴까요? 따뜻하게 드릴까요?"}, 
 {"role": "user", "content": "하나는 차갑게 하나는 따뜻하게"}, {"role": "assistant", "content": "초코라떼 하나는 차갑게 하나는 뜨겁게 추가했어요. 필요하신게 더 있으시나요?"}, 
-{"role": "user", "content": "이대로 줘요"}, {"role": "assistant", "content": "{\"takeout\": \"매장\", \"totalPrice\": 11600, \"orderDetailRequestDtoList\": [{\"menuName\": \"초코라떼\",\"amount\": 1,\"price\": 5800,\"temperature\": \"ice\"},{\"menuName\": \"초코라떼\",\"amount\": 1,\"price\": 5800,\"temperature\": \"hot\"}]}"}]}
+{"role": "user", "content": "그냥 포장해갈래요"}, {"role": "assistant", "content": "네 알겠습니다, 또 달리 원하시는게 있으신가요?"}, 
+{"role": "user", "content": "이대로 줘요"}, 
+{"role": "assistant", "content": "{\"takeout\": \"포장\", \"totalPrice\": 11600, \"orderDetailRequestDtoList\": [{\"menuName\": \"초코라떼\",\"amount\": 1,\"price\": 5800,\"temperature\": \"ice\"},{\"menuName\": \"초코라떼\",\"amount\": 1,\"price\": 5800,\"temperature\": \"hot\"}]}"}]}
 
-{"messages": [ {"role": "assistant", "content": "(id: 4,name: 포도 주스, price: 4500, description: 포도를 갈아 만든 음료, categoryName: 주스)"}, 
+case23 메뉴 추천. 메뉴와 온도와 수량 동시 입력>포장확인. 추가주문 입력. 같은 메뉴를 온도에 따라 메뉴 나뉨
+{"messages": [ {"role": "assistant", "content": "(id: 7, name: 망고주스, price: 4800, description: 망고를 갈아 만든 달달한 음료, categoryName: 주스)"}, 
+{"role": "user", "content": "안녕"}, {"role": "assistant", "content": "반가워요! 현재 달달한 망고주스가 있는데, 어떠신가요?"}, 
+{"role": "user", "content": "망고주스 뜨겁게 두 개"}, {"role": "assistant", "content": "뜨거운 망고주스 세 잔, 더 필요하신게 있으신가요?"}, 
+{"role": "user", "content": "이대로"}, {"role": "assistant", "content": "포장하시나요?"}, 
+{"role": "user", "content": "응 그리고 망고주스 차갑게 한잔도 줘"}, {"role": "user", "content": "망고주스 뜨겁게 두잔, 차갑게 한 잔 맞나요?"}, 
+{"role": "user", "content": "맞아"}, 
+{"role": "assistant", "content": "{\"takeout\": \"포장\", \"totalPrice\": 14400, \"orderDetailRequestDtoList\": [{\"menuName\": \"망고주스\",\"amount\": 2,\"price\": 9600,\"temperature\": \"hot\"}, {\"menuName\": \"망고주스\",\"amount\": 1,\"price\": 4800,\"temperature\": \"ice\"}]}"}]}
+
+case24 메뉴와 포장 동시 입력>온도 확인. 다른 메뉴 있는지 확인. 다시 돌아와서 수량 입력>온도>포장/매장 확인
+{"messages": [ {"role": "assistant", "content": "(id: 004, name: 포도 주스, price: 4500, description: 포도를 갈아 만든 음료, categoryName: 주스)"}, 
 {"role": "user", "content": "주문할께요"}, {"role": "assistant", "content": "네, 무엇을 도와드릴까요?"}, 
 {"role": "user", "content": "포도주스 포장해주세요"}, {"role": "assistant", "content": "네, 포도주스 포장해 드릴께요. 차갑게 드릴까요?"}, 
 {"role": "user", "content": "사과주스는요"}, {"role": "assistant", "content": "사과주스는 아쉽지만 팔지 않아요."}, 
 {"role": "user", "content": "포도주스 한잔 주세요"}, {"role": "assistant", "content": "시원하게 드릴까요?"}, 
 {"role": "user", "content": "아뇨 따뜻하게줘요"}, {"role": "assistant", "content": "네, 더 필요하신게 있으신가요?"}, 
 {"role": "user", "content": "없어요"}, {"role": "assistant", "content": "매장에서 드시나요?"},
-{"role": "user", "content": "응 매장에서 먹어"}, {"role": "assistant", "content": "{\"takeout\": \"매장\", \"totalPrice\": 4500, \"orderDetailRequestDtoList\": [{\"menuName\": \"포도 주스\",\"amount\": 1,\"price\": 4500,\"temperature\": \"hot\"}]}"}]}
+{"role": "user", "content": "매장에서 먹어요"}, 
+{"role": "assistant", "content": "{\"takeout\": \"매장\", \"totalPrice\": 4500, \"orderDetailRequestDtoList\": [{\"menuName\": \"포도 주스\",\"amount\": 1,\"price\": 4500,\"temperature\": \"hot\"}]}"}]}
 
-{"messages": [ {"role": "assistant", "content": "(id: 36,name: 히비스커스차, price: 3300, description: 로젤 열매를 말린 후 끓여 우려낸 대용차, categoryName: 티)"}, 
+case25 메뉴 입력>온도>각각의 수량과 각 온도 입력. 취소. 포장/매장 확인
+{"messages": [ {"role": "assistant", "content": "(id: 32, name: 히비스커스차, price: 3300, description: 로젤 열매를 말린 후 끓여 우려낸 대용차, categoryName: 티)"}, 
 {"role": "user", "content": "히비스커스차"}, {"role": "assistant", "content": "히비스커스차 따뜻하게 드릴까요?"}, 
-{"role": "user", "content": "아니요 한잔은 따뜻하게 두잔은 차게 주세요"}, {"role": "assistant", "content": "히비스커스 따뜻하게 한잔과 차갑게 두잔, 또다른 주문 있으시나요?"}, 
-{"role": "user", "content": "차가운거 하나는 다시 취소할께요"}, {"role": "assistant", "content": "네, 히비스커스차 따뜻하게 한잔과, 차갑게 한잔 추가했어요. 또 있으시나요?"}, 
+{"role": "user", "content": "아니요 한잔은 따뜻하게 두잔은 차게 주세요"}, {"role": "assistant", "content": "히비스커스 따뜻하게 한 잔과 차갑게 두 잔 추가했어요. 또다른 주문 있으시나요?"}, 
+{"role": "user", "content": "차가운거 하나는 취소할께요"}, {"role": "assistant", "content": "네, 히비스커스차 따뜻하게 한 잔과, 차갑게 한 잔, 또 있으시나요?"}, 
 {"role": "user", "content": "아니요 이대로 주세요"}, {"role": "assistant", "content": "포장하실건가요?"}
-{"role": "user", "content": "응"}, {"role": "assistant", "content": "{\"takeout\": \"포장\", \"totalPrice\": 6600, \"orderDetailRequestDtoList\": [{\"menuName\": \"히비스커스차\",\"amount\": 1,\"price\": 3300,\"temperature\": \"hot\"},{\"menuName\": \"hibiscus tea\",\"amount\": 1,\"price\": 3300,\"temperature\": \"ice\"}]}"}]}
+{"role": "user", "content": "네 포장해갈께요"}, 
+{"role": "assistant", "content": "{\"takeout\": \"포장\", \"totalPrice\": 6600, \"orderDetailRequestDtoList\": [{\"menuName\": \"히비스커스차\",\"amount\": 1,\"price\": 3300,\"temperature\": \"hot\"},{\"menuName\": \"히비스커스차\",\"amount\": 1,\"price\": 3300,\"temperature\": \"ice\"}]}"}]}
+
+
+case30 메뉴 등록 둘 이상
+
+case31 대화 위주. 추천. 두개의 메뉴와 수량 동시 입력>온도>포장/매장 확인
+{"messages": [ {"role": "assistant", "content": "(id: 11, name: 밀크티, price: 4500, description: 우유와 홍차를 혼합한 부드러운 음료, categoryName: 티)"}, 
+{"role": "assistant", "content": "(id: 21, name: 망고주스, price: 3500, description: 망고 즙이 첨가된 달달한 음료, categoryName: 주스)"}, 
+{"role": "assistant", "content": "(id: 31, name: 아메리카노, price: 2500, description: 은은한 향으로 자극시키는 음료, categoryName: 커피)"}, 
+{"role": "user", "content": "메뉴 알려줘요"}, {"role": "assistant", "content": "밀크티, 망고주스, 아메리카노가 있어요."}, 
+{"role": "user", "content": "가격은 어떻게되요"}, {"role": "assistant", "content": "각각 4500원, 3500원, 2500원 이에요."}, 
+{"role": "user", "content": "커피 종류는"}, {"role": "assistant", "content": "현재 아메리카노가 있어요."},
+{"role": "user", "content": "망고주스 설명"}, {"role": "assistant", "content": "망고주스는 망고 즙이 첨가된 달달한 음료에요."},
+{"role": "user", "content": "가격 싼걸로 추천해줘"}, {"role": "assistant", "content": "2500원의 아메리카노를 추천해 드립니다. 주문 도와드릴까요?"},
+{"role": "user", "content": "망고주스랑 아메리카노 각각 한잔씩"}, {"role": "assistant", "content": "망고주스, 밀크티 각각 한잔씩, 시원하게 드릴까요?"},
+{"role": "user", "content": "차갑게 줘"}, {"role": "assistant", "content": "포장해 가실껀가요?"},
+{"role": "user", "content": "여기서 마시고 갈꺼야"}, 
+{"role": "assistant", "content": "{\"takeout\": \"takeout\", \"totalPrice\": 17000, \"orderDetailRequestDtoList\": [{\"menuName\": \"망고주스\",\"amount\": 1,\"price\": 3500,\"temperature\": \"ice\"}, {\"menuName\": \"밀크티\",\"amount\": 1,\"price\": 4500,\"temperature\": \"ice\"}, {\"menuName\": \"밀크티\",\"amount\": 1,\"price\": 9000,\"temperature\": \"hot\"}]}"}]}
+
+case32 
+{"messages": [ {"role": "assistant", "content": "(id: ,name: 홍차, price: 4600, description: 차 나뭇잎을 발효시켜 만든 강한 향의 차, categoryName: 티)"}, 
+{"role": "assistant", "content": "(id: ,name: 자몽 주스, price: 5000, description: 자몽의 특유한 상큼하고 신맛이 강한 주스, categoryName: 주스)"}, 
+{"role": "assistant", "content": "(id: ,name: 포도 주스, price: 5000, description: 신선한 포도를 갈아서 만든 음료, categoryName: 주스)"}, 
+{"role": "assistant", "content": "(id: ,name: 토피넛 라떼, price: 4900, description: 토피 시럽을 추가하여 그위에 토피넛을 뿌린 음료, categoryName: 논커피)"}, 
+{"role": "assistant", "content": "(id: ,name: 초코 라떼, price: 5800, description: 초코향과 맛이 진한 라떼, categoryName: 논커피)"}, 
+{"role": "user", "content": "주스 주세요"}, 
+{"role": "assistant", "content": "자몽 주스와 포도 주스가 있어요. 무엇을 드릴까요?"}, 
+{"role": "user", "content": "자몽주스 설명해줘요"}, 
+{"role": "assistant", "content": "자몽의 특유한 상큼한 향과 신맛이 함유된 주스에요. 가격은 5000원 입니다."}, 
+{"role": "user", "content": "오렌지 주스 설명해줘요"}, 
+{"role": "assistant", "content": "죄송해요. 오렌지 주스는 팔고 있지 않아요."}, 
+{"role": "user", "content": "그러면 자몽주스와 포도주스 하나씩 주세요"}, 
+{"role": "assistant", "content": "네, 온도는 차갑게 드릴까요?"}, 
+{"role": "user", "content": "전부 취소하고 토피넛 라떼 주세요"}, 
+{"role": "assistant", "content": "시원하게 드릴까요?"}, 
+{"role": "user", "content": "네 그리고 따뜻한 자몽주스 두개 주문할께요"},
+{"role": "assistant", "content": "시원한 토피넛 라떼 한 잔, 따뜻한 자몽주스 두 잔. 이렇게 드릴까요?"}, 
+{"role": "user", "content": "네"},
+{"role": "assistant", "content": "{\"takeout\": \"takeout\", \"totalPrice\": 14900, \"orderDetailRequestDtoList\": [{\"menuName\": \"toffee nut latte\",\"amount\": 1,\"price\": 4900,\"temperature\": \"ice\"},{\"menuName\": \"grapefruit juice\",\"amount\": 2,\"price\": 10000,\"temperature\": \"hot\"}"}]}
