@@ -13,7 +13,7 @@ _ = load_dotenv(find_dotenv())
 from .model_manage import CAFEBOT
 
 llm = ChatOpenAI(
-    api_key=os.getenv("SERV_KEY"),
+    api_key=os.getenv("OPENAI_API_KEY_EUNHAK"),
 
     model_name= CAFEBOT,
     

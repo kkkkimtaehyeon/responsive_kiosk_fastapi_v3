@@ -14,7 +14,7 @@ from .model_manage import GPT4O
 # from .model_manage import KEYBOT
 
 llm = ChatOpenAI(
-    api_key=os.getenv("SERV_KEY"),
+    api_key=os.getenv("OPENAI_API_KEY_EUNHAK"),
 
     model_name= GPT4O,
     # model_name= KEYBOT,
