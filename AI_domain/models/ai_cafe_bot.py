@@ -36,7 +36,7 @@ prompt = ChatPromptTemplate.from_messages(
          For any other input without brackets, handle the order conversationally as a human would.
          """),
         MessagesPlaceholder(variable_name="history"),
-        ("human", "{order}")
+        ("human", "{question}")
     ]
 )
 
