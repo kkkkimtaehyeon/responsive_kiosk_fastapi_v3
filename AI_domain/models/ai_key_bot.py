@@ -4,7 +4,8 @@ from langchain.chains import LLMChain
 from langchain.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain.memory import ConversationBufferMemory
 
-from .model_manage import KEYBOT, GPT4O
+# from .model_manage import KEYBOT
+from .model_manage import GPT4O
 
 from dotenv import load_dotenv, find_dotenv
 import os
