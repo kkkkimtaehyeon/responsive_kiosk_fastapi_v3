@@ -36,7 +36,7 @@ prompt = ChatPromptTemplate.from_messages(
          : (id: int, name: n, price: pri, description: des, categoryName: cn)
          Square brackets with keywords as input, find all relevant items from currently registered menus, then gen JSON.
          : "menuList": [("id": int,"name": "n"),("id": int,"name": "n")]
-         Don't need new lines, special characters, etc.
+         Output only the JSON object without any additional text or formatting.
          If no matching menu item is found, output 'n' word.
          """),
         MessagesPlaceholder(variable_name="history"),
