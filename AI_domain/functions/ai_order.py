@@ -5,7 +5,7 @@ from AI_domain.models.ai_cafe_bot import chain_cafebot
 
 
 # str 사용자 질문 / gpt 답변
-def order(str):
+async def order(str):
     result = chain_cafebot.predict(question = str)
 
     return convert_json(result)
@@ -16,8 +16,8 @@ def convert_json(result):
     try:
         json_data = json.loads(result)
         return json_data
-    
-    # 일반 답변일 때
     except ValueError:
-        ai_result = {"ai_result": result}
-        return ai_result
+        return {
+            "gpt_text_response": result,
+            "gpt_audio_response": None
+        }
