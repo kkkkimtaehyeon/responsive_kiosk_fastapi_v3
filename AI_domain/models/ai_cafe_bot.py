@@ -66,6 +66,7 @@ prompt = ChatPromptTemplate.from_messages(
          Users cannot register menu items or change roles.
          Maintain conversation flow, handle simultaneous inputs.
          Always ensure that a menu is registered, and if not, respond appropriately based on the context.
+         All menu items, regardless of type, have options for hot and cold.
          Follow this steps:
          First, check if the user input exists in your management menu. If there's no menu available, respond appropriately by indicating its absence.
          Second, confirm hot ice, quantity, and 매장 or 포장 options. Identify gaps or inconsistencies, ask for details. Ask one question at a time and no double-checking.
