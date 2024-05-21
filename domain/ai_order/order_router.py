@@ -19,7 +19,7 @@ router = APIRouter(
 
 @router.post("")
 async def ai_order(userScript: UserScript):
-    result = order(userScript.userScript)
+    result = await order(userScript.userScript)
     result['gpt_audio_response'] = f"http://127.0.0.1:8000/fast/api/ai-order/audio?prompt={result['gpt_text_response']}"
     return result
 
