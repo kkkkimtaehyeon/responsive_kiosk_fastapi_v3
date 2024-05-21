@@ -11,7 +11,7 @@ router = APIRouter(
 
 @router.post("")
 async def search_menu(search_keywords:SearchKeywords):
-    result = search_menu_by_keywords(search_keywords.ingredients)
+    result = await search_menu_by_keywords(search_keywords.ingredients)
     #result = search_keywords.ingredients
     #result = convert_to_searchform(search_keywords.ingredients)
 
