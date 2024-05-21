@@ -3,7 +3,7 @@ from fastapi.responses import StreamingResponse
 from fastapi import Response
 from io import BytesIO
 
-client = OpenAI()
+client = OpenAI(api_key="")
 
 async def text_to_speech(prompt):
     response = client.audio.speech.create(
