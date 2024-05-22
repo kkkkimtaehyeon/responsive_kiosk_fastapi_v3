@@ -20,7 +20,7 @@ async def add_menu(menu:Menu2):
 @router.delete("/{id}")
 async def delete_menu(id: int):
     try:
-        #menu_service.delete_menu(id)
+        menu_service.delete_menu(id)
         return {"message": f"menu id: {id} has been successfully deleted!!"}
     except Exception as e:
         raise HTTPException(status_code=404, detail=str(e))
