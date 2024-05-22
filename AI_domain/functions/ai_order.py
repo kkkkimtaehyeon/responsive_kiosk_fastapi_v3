@@ -10,17 +10,19 @@ from AI_domain.functions.memory_action import Remove
 # async def order(str):
 #     result = chain_cafebot.predict(question = str)
 
-#     return convert_json(result)
+#     return is_json(result)
+
+
 async def order(str):
-    result = chain_cafebot.predict(question = str)
-    convert_json(result)
-    return result
+    return chain_cafebot.predict(question = str)
 
 
-# json 포맷으로 변환 시도
-def convert_json(result):
-    try:
-        json.loads(result)
-        Remove.cafebot_all_msg
-    except ValueError:
-        None
+
+
+# def is_json(data):
+#     try:
+#         json_object = json.loads(data)
+#         Remove.cafebot_all_msg()
+#     except ValueError as e:
+#         return False
+#     return True
