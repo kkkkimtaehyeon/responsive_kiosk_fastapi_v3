@@ -20,3 +20,4 @@ class Menu:
     def delete_on_gpt(delete_prompt):
         pass
     
+    

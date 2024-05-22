@@ -9,6 +9,7 @@ from AI_domain.models.ai_cafe_bot import chain_cafebot
 #     result = chain_cafebot.predict(question = str)
 
 #     return convert_json(result)
+
 async def order(str):
     return chain_cafebot.predict(question = str)
 

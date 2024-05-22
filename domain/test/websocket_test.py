@@ -3,8 +3,9 @@ from AI_domain.functions.ai_order import order
 from domain.common.aws import Aws
 from botocore.exceptions import BotoCoreError, ClientError
 from contextlib import closing
-import os
-from tempfile import gettempdir
+# gpt를 사용한 주문 기능을 위해 import
+from AI_domain.functions.ai_order import order
+import json
 
 router = APIRouter(
     prefix="/websocket"
@@ -37,6 +38,10 @@ async def websocket_endpoint_v2(websocket: WebSocket):
         while True:
             data = await websocket.receive_text()
             print(f"received text: {data}")
+
+            
+
+
             try:
                 response = Aws.polly.synthesize_speech(
                     LanguageCode='ko-KR',
@@ -75,20 +80,35 @@ async def websocket_endpoint(websocket: WebSocket):
     while True:
         data = await websocket.receive_text()
         print(f"received data : {data}")
-        try:
-            response = Aws.polly.synthesize_speech(
-                LanguageCode='ko-KR',
-                Text=data,
-                OutputFormat='mp3',
-                VoiceId='Seoyeon'
-            )
-        except (BotoCoreError, ClientError) as error:
-            await websocket.send_text(f"Error: {error}")
-            continue
+        
+        gpt_response = await order(data) # gpt에게 주문하고 답변 수신
+        print(f"gpt is responding! : {gpt_response}")
+        #await websocket.send_text(gpt_response)
 
-        if "AudioStream" in response:
-            for chunk in response['AudioStream'].iter_chunks(chunk_size=8192):
-                await websocket.send_bytes(chunk)
-                print("chunk 전송")
-        else:
-            await websocket.send_text("오디오를 스트리밍 할 수 없습니다.")
+        if(is_json(gpt_response)): #gpt_response가 json이면 -> 주문이 종료되면 json 전송
+            await websocket.send_json(gpt_response)
+        else: #gpt_response가 json이 아니면 -> 답변을 받은 것이면 오디오 chunk 전송
+            try:
+                response = Aws.polly.synthesize_speech(
+                    LanguageCode='ko-KR',
+                    Text=gpt_response,
+                    OutputFormat='mp3',
+                    VoiceId='Seoyeon'
+                )
+            except (BotoCoreError, ClientError) as error:
+                await websocket.send_text(f"Error: {error}")
+                continue
+
+            if "AudioStream" in response:
+                for chunk in response['AudioStream'].iter_chunks(chunk_size=8192):
+                    await websocket.send_bytes(chunk)
+                    print(f"chunk({len(chunk)}) 전송!")
+            else:
+                await websocket.send_text("오디오를 스트리밍 할 수 없습니다.")
+
+def is_json(data):
+    try:
+        json_object = json.loads(data)
+    except ValueError as e:
+        return False
+    return True
