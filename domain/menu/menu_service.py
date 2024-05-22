@@ -5,4 +5,10 @@ def add_menu(menu):
     menu_prompt = Menu.generate_register_prompt(menu)
 
     return Menu.register_on_gpt(menu_prompt)
+
+def delete_menu(id):
+    delete_prompt = Menu.generate_delete_prompt(id)
+
+    return Menu.delete_on_gpt(delete_prompt)
+
     
