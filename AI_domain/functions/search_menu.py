@@ -1,12 +1,15 @@
 import json
 from AI_domain.models.ai_key_bot import chain_keybot
 
+from AI_domain.functions.memory_action import Remove
+
 # -------중년층 Keywords 입력, 지정된 JSON 답변
 
 
 # ingredients 키워드 질문 / gpt 답변
 async def search_menu(ingredients):
     menu_id_list = chain_keybot.predict(question = convert_to_searchform(ingredients))
+    Remove.keybot_all_msg()
 
     return convert_json(menu_id_list)
 
