@@ -18,6 +18,7 @@ llm = ChatOpenAI(
     
     # model_name= KEYBOT,
     model_name= GPT4O,
+    temperature=0,
     
     tiktoken_model_name="gpt-3.5-turbo",
     )
@@ -29,15 +30,28 @@ memory = ConversationBufferMemory(
     return_messages=True,
 )
 
+# prompt = ChatPromptTemplate.from_messages(
+#     [
+#         ("system", """
+#          Currently, there are no menu items, and the following will be registered.
+#          : (id: int, name: n, price: pri, description: des, categoryName: cn)
+#          Square brackets with keywords as input, find all relevant items from currently registered menus, then gen JSON.
+#          : "menuList": [("id": int,"name": "n"),("id": int,"name": "n")]
+#          Output only the JSON object without any additional text or formatting.
+#          If no matching menu item is found, output 'n' word.
+#          """),
+#         MessagesPlaceholder(variable_name="history"),
+#         ("human", "{question}")
+#     ]
+# )
+
 prompt = ChatPromptTemplate.from_messages(
     [
         ("system", """
-         Currently, there are no menu items, and the following will be registered.
-         : (id: int, name: n, price: pri, description: des, categoryName: cn)
-         Square brackets with keywords as input, find all relevant items from currently registered menus, then gen JSON.
-         : "menuList": [("id": int,"name": "n"),("id": int,"name": "n")]
-         Output only the JSON object without any additional text or formatting.
-         If no matching menu item is found, output 'n' word.
+         Currently no menu items available.
+         Do not include any formatting or code block syntax.
+         You MUST select registered menu items matching the keyword, including all related menu items, and you MUST respond only with a JSON object containing a 'menuList' array. Each item in the array should have an 'id' int and a 'name' str.
+         If no matches, respond only "n" word not json.
          """),
         MessagesPlaceholder(variable_name="history"),
         ("human", "{question}")
