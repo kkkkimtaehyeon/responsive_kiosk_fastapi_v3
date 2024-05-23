@@ -29,3 +29,7 @@ def convert_json(result):
     # JSON 답변이 아닐때
     except ValueError:
         return None
+
+    # # JSON답변 아닐때 문자열 확인용
+    # except ValueError:
+    #     return {"ai_result" : result}
