@@ -14,7 +14,7 @@ router = APIRouter(
 
 @router.post("/")
 async def get_stt(user_script: UserScript):
-    gpt_script = order(user_script.userScript)
+    gpt_script = await order(user_script.userScript)
     gpt_audio_url = get_tts_url(gpt_script)
 
     return {

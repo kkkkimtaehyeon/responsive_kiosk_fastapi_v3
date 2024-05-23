@@ -1,6 +1,8 @@
 import json
 from AI_domain.models.ai_cafe_bot import chain_cafebot
 
+from AI_domain.functions.memory_action import Remove
+
 # -------노년층 대화 입력, 지정된 JSON 답변
 
 
@@ -15,13 +17,12 @@ async def order(str):
     return chain_cafebot.predict(question = str)
 
 
-# json 포맷으로 변환
-# def convert_json(result):
+
+
+# def is_json(data):
 #     try:
-#         json_data = json.loads(result)
-#         return json_data
-#     except ValueError:
-#         return {
-#             "gpt_text_response": result,
-#             "gpt_audio_response": None
-#         }
+#         json_object = json.loads(data)
+#         Remove.cafebot_all_msg()
+#     except ValueError as e:
+#         return False
+#     return True
