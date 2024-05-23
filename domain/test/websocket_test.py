@@ -38,10 +38,6 @@ async def websocket_endpoint_v2(websocket: WebSocket):
         while True:
             data = await websocket.receive_text()
             print(f"received text: {data}")
-
-            
-
-
             try:
                 response = Aws.polly.synthesize_speech(
                     LanguageCode='ko-KR',
@@ -73,7 +69,7 @@ async def websocket_endpoint_v2(websocket: WebSocket):
     finally:
         await websocket.close()
 
-
+#현재 사용 중
 @router.websocket("/v3/ws")
 async def websocket_endpoint(websocket: WebSocket):
     await websocket.accept()
@@ -83,11 +79,12 @@ async def websocket_endpoint(websocket: WebSocket):
         
         gpt_response = await order(data) # gpt에게 주문하고 답변 수신
         print(f"gpt is responding! : {gpt_response}")
-        #await websocket.send_text(gpt_response)
+        
 
         if(is_json(gpt_response)): #gpt_response가 json이면 -> 주문이 종료되면 json 전송
             await websocket.send_json(gpt_response)
         else: #gpt_response가 json이 아니면 -> 답변을 받은 것이면 오디오 chunk 전송
+            await websocket.send_text(gpt_response)
             try:
                 response = Aws.polly.synthesize_speech(
                     LanguageCode='ko-KR',
