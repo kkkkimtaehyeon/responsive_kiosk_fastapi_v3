@@ -30,15 +30,14 @@ memory = ConversationBufferMemory(
     return_messages=True,
 )
 
+
 # prompt = ChatPromptTemplate.from_messages(
 #     [
 #         ("system", """
-#          Currently, there are no menu items, and the following will be registered.
-#          : (id: int, name: n, price: pri, description: des, categoryName: cn)
-#          Square brackets with keywords as input, find all relevant items from currently registered menus, then gen JSON.
-#          : "menuList": [("id": int,"name": "n"),("id": int,"name": "n")]
-#          Output only the JSON object without any additional text or formatting.
-#          If no matching menu item is found, output 'n' word.
+#          Currently no menu items available.
+#          Do not include any formatting or code block syntax.
+#          You MUST select registered menu items matching the keyword, including all related menu items, and you MUST respond only with a JSON object containing a 'menuList' array. Each item in the array should have an 'id' int and a 'name' str.
+#          If no matches, respond only "n" word not json.
 #          """),
 #         MessagesPlaceholder(variable_name="history"),
 #         ("human", "{question}")
@@ -48,10 +47,11 @@ memory = ConversationBufferMemory(
 prompt = ChatPromptTemplate.from_messages(
     [
         ("system", """
+         You are a helpful assistant that helps users find menu items.
          Currently no menu items available.
          Do not include any formatting or code block syntax.
-         You MUST select registered menu items matching the keyword, including all related menu items, and you MUST respond only with a JSON object containing a 'menuList' array. Each item in the array should have an 'id' int and a 'name' str.
-         If no matches, respond only "n" word not json.
+         - You MUST select registered menu items that match the keyword in their description or categoryname, include all related menu items, and you MUST respond only with a JSON object containing a 'menuList' array. Each item in the array should have an 'id' int and a 'name' str.
+         - If no matches, You MUST respond only "n" word not json.
          """),
         MessagesPlaceholder(variable_name="history"),
         ("human", "{question}")
