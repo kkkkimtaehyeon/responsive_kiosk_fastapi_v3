@@ -14,15 +14,18 @@ from AI_domain.functions.memory_action import Remove
 
 
 async def order(str):
-    return chain_cafebot.predict(question = str)
+    result = chain_cafebot.predict(question = str)
+    is_json(result)
+
+    return result
 
 
 
-
-# def is_json(data):
-#     try:
-#         json_object = json.loads(data)
-#         Remove.cafebot_all_msg()
-#     except ValueError as e:
-#         return False
-#     return True
+# JSON 일시 대화기록 삭제
+def is_json(data):
+    try:
+        json.loads(data)
+        Remove.cafebot_all_msg()
+        return None
+    except ValueError:
+        return None
