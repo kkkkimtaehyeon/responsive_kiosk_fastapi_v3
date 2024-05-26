@@ -12,7 +12,7 @@ from domain.stt import stt_router
 from domain.search import search_router
 from domain.ai_order import order_router
 from domain.test import websocket_test
-
+from domain.menu.menu_service import backup_on_gpt, fetch_menus
 
 app = FastAPI()
 
@@ -41,20 +41,10 @@ app.include_router(websocket_test.router )
 # 서비 시작시 실행
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    await fetch_menus()
-    print("backup success")
+    menus = await fetch_menus()
+    await backup_on_gpt(menus)
     yield
 
 app.router.lifespan_context=lifespan
 
 
-
-#asyncio.run(fetch_menus())
-# 모든 메뉴 정보를 반환
-async def fetch_menus():
-    async with httpx.AsyncClient() as client:
-        response = await client.get('http://localhost:8080/api/menus')
-        print(response.status_code)
-
-        json_data = response.content.decode('utf-8')
-        data = json.loads(json_data)
