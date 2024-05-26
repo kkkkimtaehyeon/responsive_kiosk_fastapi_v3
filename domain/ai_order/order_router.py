@@ -34,11 +34,8 @@ router = APIRouter(
 # async def get_audio(prompt: str = Query(...)):
 #     return await text_to_speech(prompt)
 
-
-
-
-# 32kb 스트리밍 
-@router.websocket("/v3/polly")
+# 전체 스트리밍 
+@router.websocket("/v2/polly")
 async def websocket_endpoint(websocket: WebSocket):
     await websocket.accept()
     while True:
@@ -64,12 +61,53 @@ async def websocket_endpoint(websocket: WebSocket):
                 await websocket.send_text(f"Error: {error}")
                 continue
 
+            buffer = io.BytesIO()
+            if "AudioStream" in response:
+                for chunk in response['AudioStream'].iter_chunks(chunk_size=8192):
+                    buffer.write(chunk)
+                buffer.seek(0)
+                await websocket.send_bytes(buffer.read())
+                print(f"buffer({len(buffer.read()) } 전송 완료!)")
+                buffer.seek(0)
+                buffer.truncate(0)
+            else:
+                await websocket.send_text("오디오를 스트리밍 할 수 없습니다.")
+
+
+# 32kb 스트리밍 
+@router.websocket("/v3/polly")
+async def websocket_endpoint(websocket: WebSocket):
+    await websocket.accept()
+    while True:
+        data = await websocket.receive_text()
+        print(f"received data : {data}")
+        
+        gpt_response = await order(data) # gpt에게 주문하고 답변 수신
+        print(f"gpt is responding! : {gpt_response}")
+        
+        if(is_json(gpt_response)): #gpt_response가 json이면 -> 주문이 종료되면 json 전송
+            await websocket.send_json(gpt_response)
+        else: #gpt_response가 json이 아니면 -> 답변을 받은 것이면 오디오 chunk 전송
+            await websocket.send_text(gpt_response)
+            try:
+                response = Aws.polly.synthesize_speech(
+                    LanguageCode='ko-KR',
+                    Text=gpt_response,
+                    OutputFormat='mp3',
+                    VoiceId='Seoyeon'
+                )
+            except (BotoCoreError, ClientError) as error:
+                await websocket.send_text(f"Error: {error}")
+                continue
+
             if "AudioStream" in response:
                 for chunk in response['AudioStream'].iter_chunks(chunk_size=32768):
                     await websocket.send_bytes(chunk)
                     print(f"chunk({len(chunk)}) 전송!")
             else:
                 await websocket.send_text("오디오를 스트리밍 할 수 없습니다.")
+
+
 
 client = OpenAI()
 
@@ -84,6 +122,7 @@ async def websocket_endpoint(websocket: WebSocket):
         
         gpt_response = await order(data) # gpt에게 주문하고 답변 수신
         print(f"gpt is responding! : {gpt_response}")
+        
 
         if(is_json(gpt_response)): #gpt_response가 json이면 -> 주문이 종료되면 json 전송
             await websocket.send_json(gpt_response)
@@ -109,7 +148,6 @@ async def websocket_endpoint(websocket: WebSocket):
         
         gpt_response = await order(data) # gpt에게 주문하고 답변 수신
         print(f"gpt is responding! : {gpt_response}")
-        
 
         if(is_json(gpt_response)): #gpt_response가 json이면 -> 주문이 종료되면 json 전송
             await websocket.send_json(gpt_response)

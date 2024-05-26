@@ -125,7 +125,7 @@ async def websocket_endpoint(websocket: WebSocket):
             try:
                 response = client.audio.speech.create(
                 model="tts-1",
-                voice="alloy",
+                voice="shimmer",
                 input=gpt_response,
                 response_format="mp3"
             )
@@ -159,7 +159,7 @@ async def websocket_endpoint(websocket: WebSocket):
             await websocket.send_text(gpt_response)
             with client.audio.speech.with_streaming_response.create(
                 model="tts-1",
-                voice="alloy",
+                voice="shimmer",
                 input=gpt_response,
                 response_format='mp3'
             ) as response:
