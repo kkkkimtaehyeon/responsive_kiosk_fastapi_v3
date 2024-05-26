@@ -1,4 +1,7 @@
 import uvicorn
+import httpx
+import json
+from contextlib import asynccontextmanager
 from fastapi import FastAPI, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -33,3 +36,25 @@ app.include_router(stt_router.router)
 app.include_router(search_router.router)
 app.include_router(order_router.router) 
 app.include_router(websocket_test.router )
+
+
+# 서비 시작시 실행
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    await fetch_menus()
+    print("backup success")
+    yield
+
+app.router.lifespan_context=lifespan
+
+
+
+#asyncio.run(fetch_menus())
+# 모든 메뉴 정보를 반환
+async def fetch_menus():
+    async with httpx.AsyncClient() as client:
+        response = await client.get('http://localhost:8080/api/menus')
+        print(response.status_code)
+
+        json_data = response.content.decode('utf-8')
+        data = json.loads(json_data)
