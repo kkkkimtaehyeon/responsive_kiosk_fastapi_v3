@@ -14,9 +14,9 @@ class Menu(BaseModel):
 
 # 호출될 함수. menu_prompt. 메뉴 추가 프롬프트를 buffermemory내에 저장
 def add_menu(menu):
-    menu_prompt = Prompt.gen_register_prompt(menu)
+    menu_prompt = Prompt.generate_menu_prompt(menu)
 
-    return Add.menu_info(menu_prompt)
+    return Add.menu_information(menu_prompt)
 
 def delete_menu(id):
     # delete_prompt = Prompt.gen_delete_prompt(id)

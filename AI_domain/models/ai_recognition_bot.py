@@ -12,8 +12,8 @@ key = os.getenv("OPENAI_API_KEY_EUNHAK")
 client = OpenAI(api_key=key)
 
 
-class faceRecog:
-    def create_msg(base64_string):
+class faceRecognition:
+    def create_message(base64_string):
         messages=[
             {
                 "role": "user",
@@ -30,10 +30,10 @@ class faceRecog:
         ]
         return messages
 
-    async def request_opt(msg):
+    async def request_option(message):
         response = client.chat.completions.create(
             model=GPT4O,
-            messages=msg,
+            messages=message,
             temperature=0,
         )
         return response.choices[0].message.content

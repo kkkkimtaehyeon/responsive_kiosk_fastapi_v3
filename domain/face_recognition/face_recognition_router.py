@@ -6,7 +6,7 @@ from PIL import Image
 import io
 import numpy as np
 
-from AI_domain.functions.test_face_recognition import face_recog
+from AI_domain.functions.test_face_recognition import face_recognition
 import base64
 
 router = APIRouter(
@@ -36,10 +36,10 @@ async def face_recognition_service(image_file: UploadFile = File(...)):
     contents = await image_file.read()
     base64_str = base64.b64encode(contents).decode("utf-8")
 
-    generation_opt = await face_recog(base64_str)
+    generation_option = await face_recognition(base64_str)
     
 
     # 젋은층 : 1, 중년층 : 2, 노년층 : 3, 인식불가 : 0
     return {
-        "option": generation_opt
+        "option": generation_option
     }

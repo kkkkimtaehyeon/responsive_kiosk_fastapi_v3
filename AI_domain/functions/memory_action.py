@@ -2,19 +2,15 @@ from AI_domain.models import ai_cafe_bot, ai_key_bot
 
 class Prompt:
     # 메뉴 저장을 위한 프롬프트 생성 함수
-    def gen_register_prompt(menu):
+    def generate_menu_prompt(menu):
         menu_prompt = f'(id: {menu.id}, name: {menu.name}, price: {menu.price}, description: {menu.description}, categoryName: {menu.categoryName})'
         return menu_prompt
-    
-     # 메뉴 삭제를 위한 프롬프트 생성 함수
-    def gen_delete_prompt(id):
-        return f'delete menu = {id}'
 
 
 class Add:
 
     # 각 gpt에 메뉴 전달 반환값 없음
-    def menu_info(menu_prompt):
+    def menu_information(menu_prompt):
         ai_cafe_bot.memory.chat_memory.add_ai_message(menu_prompt)
         ai_key_bot.memory.chat_memory.add_ai_message(menu_prompt)
 
@@ -22,13 +18,13 @@ class Add:
 class Remove:
 
     # 등록된 메뉴 제외한 모든 메시지 삭제
-    def cafebot_all_msg():
+    def cafebot_all_massage():
         history = ai_cafe_bot.memory.chat_memory.messages
         menu_msg = [msg for msg in history if msg.type == "ai" and "(id" in msg.content.lower()]
 
         ai_cafe_bot.memory.chat_memory.messages = menu_msg
 
-    def keybot_all_msg():
+    def keybot_all_massage():
         history = ai_key_bot.memory.chat_memory.messages
         menu_msg = [msg for msg in history if msg.type == "ai" and "(id" in msg.content.lower()]
 

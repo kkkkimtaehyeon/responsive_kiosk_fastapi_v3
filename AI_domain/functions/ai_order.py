@@ -25,7 +25,7 @@ async def order(str):
 def is_json(data):
     try:
         json.loads(data)
-        Remove.cafebot_all_msg()
+        Remove.cafebot_all_massage()
         return None
     except ValueError:
         return None
