@@ -20,13 +20,13 @@ class Remove:
     # 등록된 메뉴 제외한 모든 메시지 삭제
     def cafebot_all_massage():
         history = ai_cafe_bot.memory.chat_memory.messages
-        menu_msg = [msg for msg in history if msg.type == "ai" and "(id" in msg.content.lower()]
+        menu_msg = [msg for msg in history if msg.type == "ai" and "(id" in msg.content]
 
         ai_cafe_bot.memory.chat_memory.messages = menu_msg
 
     def keybot_all_massage():
         history = ai_key_bot.memory.chat_memory.messages
-        menu_msg = [msg for msg in history if msg.type == "ai" and "(id" in msg.content.lower()]
+        menu_msg = [msg for msg in history if msg.type == "ai" and "(id" in msg.content]
 
         ai_key_bot.memory.chat_memory.messages = menu_msg
 
@@ -36,8 +36,8 @@ class Remove:
         cafebot_history = ai_cafe_bot.memory.chat_memory.messages
         keybot_history = ai_key_bot.memory.chat_memory.messages
 
-        cb_rm_menu_history = [msg for msg in cafebot_history if not (msg.type == "ai" and f"(id: {id}" in msg.content.lower())]
-        kb_rm_menu_history = [msg for msg in keybot_history if not (msg.type == "ai" and f"(id: {id}" in msg.content.lower())]
+        cb_rm_menu_history = [msg for msg in cafebot_history if not (msg.type == "ai" and f"(id: {id}" in msg.content)]
+        kb_rm_menu_history = [msg for msg in keybot_history if not (msg.type == "ai" and f"(id: {id}" in msg.content)]
 
         ai_cafe_bot.memory.chat_memory.messages = cb_rm_menu_history
         ai_key_bot.memory.chat_memory.messages = kb_rm_menu_history
