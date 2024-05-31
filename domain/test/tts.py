@@ -18,7 +18,7 @@ def stream_audio(model: str, voice: str, input_text: str, initial_buffer_size: i
     pya = pyaudio.PyAudio()
     audio_queue = queue.Queue()
 
-    client = OpenAI()
+    client = OpenAI(api_key="")
 
     with client.audio.speech.with_streaming_response.create(
         model=model,

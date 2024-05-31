@@ -105,7 +105,7 @@ async def websocket_endpoint(websocket: WebSocket):
 
 # openAi tts
 from openai import OpenAI
-client = OpenAI()
+client = OpenAI(api_key="")
 
 @router.websocket("/v4/ws")
 async def websocket_endpoint(websocket: WebSocket):
