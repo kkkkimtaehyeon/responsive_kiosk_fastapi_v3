@@ -23,19 +23,25 @@ def delete_menu(id):
     return Remove.one_menu(id)
 
 async def fetch_menus():
-    async with httpx.AsyncClient() as client:
-        response = await client.get('http://localhost:8080/api/menus')
-        print(response.status_code)
-        json_data = response.content.decode('utf-8')
-        data = json.loads(json_data)
-        menus = [Menu(**item) for item in data]
-    return menus
+    try:
+        async with httpx.AsyncClient() as client:
+            response = await client.get('http://localhost:8080/api/menus')
+            print(response.status_code)
+            json_data = response.content.decode('utf-8')
+            data = json.loads(json_data)
+            menus = [Menu(**item) for item in data]
+        return menus
+    except:
+        return None
 
 async def backup_on_gpt(menus):
-    for menu in menus:
-        try:
-            add_menu(menu)
-            print(f'{menu.name}가 백업되었습니다.')
-        except Exception as e:
-            e.with_traceback()
-            print('백업이 실패했습니다.')
+    try:
+        for menu in menus:
+            try:
+                add_menu(menu)
+                print(f'{menu.name}가 백업되었습니다.')
+            except Exception as e:
+                e.with_traceback()
+                print('백업이 실패했습니다.')
+    except:
+        return None
