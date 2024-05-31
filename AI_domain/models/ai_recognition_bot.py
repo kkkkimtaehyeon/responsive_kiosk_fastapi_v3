@@ -1,6 +1,5 @@
 from openai import OpenAI
 from .model_manage import GPT4O
-import os
 
 from dotenv import load_dotenv, find_dotenv
 import os
