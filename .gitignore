@@ -56,6 +56,11 @@ cover/
 my_test_main.py
 AI_test/
 
+nginx.conf
+docker-compose.yaml
+Dockerfile
+.dockerignore
+
 # Translations
 *.mo
 *.pot
