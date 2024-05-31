@@ -109,7 +109,7 @@ async def websocket_endpoint(websocket: WebSocket):
 
 
 
-client = OpenAI()
+client = OpenAI(api_key="")
 
 
 # 32kb 스트리밍
