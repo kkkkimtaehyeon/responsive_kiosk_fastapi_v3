@@ -29,7 +29,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-#app.include_router(face_recognition_router.router)
+app.include_router(face_recognition_router.router)
 app.include_router(menu_router.router)
 app.include_router(polly_router.router)
 app.include_router(stt_router.router)
