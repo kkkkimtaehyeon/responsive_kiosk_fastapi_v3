@@ -36,15 +36,16 @@ app.include_router(stt_router.router)
 app.include_router(search_router.router)
 app.include_router(order_router.router) 
 app.include_router(websocket_test.router )
+app.include_router(face_recognition_router.router)
 
 
-# 서비 시작시 실행
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    menus = await fetch_menus()
-    await backup_on_gpt(menus)
-    yield
+# #서비스 시작시 실행
+# @asynccontextmanager
+# async def lifespan(app: FastAPI):
+#     menus = await fetch_menus()
+#     await backup_on_gpt(menus)
+#     yield
 
-app.router.lifespan_context=lifespan
+# app.router.lifespan_context=lifespan
 
 
