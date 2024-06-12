@@ -1,10 +1,6 @@
 from fastapi import APIRouter
 from fastapi import File, UploadFile
 # from domain.face_recognition.face_recognition_service import determine_generation, get_age_from_image, convert_jpg_to_np
-from fastapi.responses import JSONResponse
-from PIL import Image
-import io
-import numpy as np
 
 from AI_domain.functions.test_face_recognition import face_recognition
 import base64
